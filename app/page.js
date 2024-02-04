@@ -1,113 +1,177 @@
-import Image from "next/image";
+"use client";
+import React, { useRef, useState } from "react";
+import { GoTasklist } from "react-icons/go";
+import { IoMdCloseCircle } from "react-icons/io";
+import { motion } from "framer-motion";
 
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+const page = () => {
+  const [first, settitle] = useState("");
+  const [dis, setdis] = useState("");
+  const [date, setdate] = useState("");
+  const [time, settime] = useState("");
+
+  const [task, setdask] = useState([]);
+
+  const Submithamd = (e) => {
+    e.preventDefault();
+    setdask([...task, { first, dis, date, time }]);
+    settitle("");
+    setdis("");
+    setdate("");
+    settime("");
+  };
+
+  let redertask = (
+    <div className="w-60 relative h-72 rounded-[20px] bg-zinc-900 p-5">
+      <GoTasklist className="text-3xl text-slate-400 mb-3" />
+
+      <div
+        className="h-[100px] whitespace-normal "
+        style={{ overflowWrap: "break-word" }}
+      >
+        <h5 className="h-full text-xl text-slate-400 capitalize">
+          No task availabe
+        </h5>
       </div>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      <div className="absolute w-full h-12 bottom-0 bg-slate-400 left-0 rounded-b-[20px]"></div>
+    </div>
   );
-}
+
+  const ref = useRef(null);
+
+  const deletehander = (i) => {
+    let copytask = [...task];
+    
+    // Add some animation or confirmation logic if needed
+    setdask(copytask.filter((_, index) => index !== i));
+
+  };
+
+  
+
+
+
+  if (task.length > 0) {
+    redertask = task.map((t, i) => {
+      return (
+        <motion.div
+          dragConstraints={ref}
+          whileDrag={{ scale: 1.1 }}
+          dragTransition={{ bounceStiffness: 600, bounceDamping: 10 }}
+          initial={{ scale: 0 }}
+          animate={{ rotate: 360, scale: 1 }}
+          transition={{
+            type: "spring",
+            stiffness: 260,
+            damping: 20,
+          }}
+          drag
+          className=" cards w-60 relative h-72 rounded-[20px] bg-zinc-900 opacity-80 p-5 transition-scale"
+          key={i}
+        >
+          <motion.button
+          whileHover={{
+           scale:1.2
+          }}
+            onClick={()=>{
+                   deletehander(i)
+            }}
+            className="button text-slate-400 absolute right-3 text-xl top-6 "
+          >
+            <IoMdCloseCircle />
+          </motion.button>
+          <GoTasklist className="text-3xl text-slate-400 mb-3" />
+          <h3 className="text-2xl text-slate-400 font-bold capitalize">
+            {t.first}
+          </h3>
+          <div
+            className="h-[100px] whitespace-normal  "
+            style={{ overflowWrap: "break-word" }}
+          >
+            <h5 className="h-full text-xl text-slate-400  capitalize">
+              {t.dis}
+            </h5>
+          </div>
+          <div className="w-full text-slate-400  flex items-center justify-between ">
+            <h3>{t.date}</h3>
+            <h3>{t.time}</h3>
+          </div>
+          <div className="absolute w-full h-12 bottom-0 bg-slate-400 left-0 rounded-b-[20px] ">
+          </div>
+          
+        </motion.div>
+      );
+    });
+  }
+
+  return (
+    <div>
+      <>
+        <div className="w-full h-screen bg-zinc-800">
+          <div className="text-zinc-600 capitalize absolute top-[5%] w-full flex justify-center font-semibold text-xl ">
+            document
+          </div>
+          <h1 className="text-[13vw] absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] font-semibold text-zinc-900 ">
+            Docs.
+          </h1>
+
+          <div className=" py-2  w-72 h-[340px] rounded bg-zinc-700 absolute bottom-2 right-4 opacity-80 z-[4]">
+            <form onSubmit={Submithamd}>
+              <input
+                className="w-full h-10 rounded bg-zinc-700 px-2 text-slate-200 text-bold   "
+                type="text"
+                placeholder="Add your Task"
+                value={first}
+                onChange={(e) => {
+                  settitle(e.target.value);
+                }}
+              />
+              <hr className="mt-[10px]" />
+              <textarea
+                className="w-full h-40 px-2  mt-3  bg-zinc-700 text-slate-200  text-start"
+                type="text"
+                placeholder="Add Description"
+                value={dis}
+                onChange={(e) => {
+                  setdis(e.target.value);
+                }}
+              />
+              <hr className="mt-[10px]" />
+              <input
+                className="mt-2 ml-7 bg-zinc-700 w-[130px] text-white"
+                type="date"
+                value={date}
+                onChange={(e) => {
+                  setdate(e.target.value);
+                }}
+              />
+              <input
+                className="ml-10 mt-2 text-white   bg-zinc-700"
+                type="time"
+                value={time}
+                onChange={(e) => {
+                  settime(e.target.value);
+                }}
+              />
+              <button className="py-2 px-3  bg-zinc-900 text-slate-400 capitalize font-bold rounded-lg mt-2 ml-[35%]">
+                Add task
+              </button>
+            </form>
+          </div>
+
+          <div
+            ref={ref}
+            className="fixed top-0 left-0 z-[3] w-full h-full flex-wrap gap-[20px] p-4  "
+          >
+            <div className="w-full h-full  flex flex-wrap gap-6">
+              {" "}
+              {redertask}
+            </div>
+          </div>
+        </div>
+      </>
+    </div>
+  );
+};
+export default page;
